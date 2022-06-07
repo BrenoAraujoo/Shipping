@@ -1,12 +1,15 @@
 package com.shipping.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class ShippingCompany implements Serializable{
@@ -17,6 +20,8 @@ public class ShippingCompany implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	@OneToMany(mappedBy = "company")
+	private List<Transport> transports = new ArrayList<>();
 	
 	public ShippingCompany() {
 
@@ -46,6 +51,11 @@ public class ShippingCompany implements Serializable{
 		this.name = name;
 	}
 
+
+
+	public List<Transport> getTransports() {
+		return transports;
+	}
 
 
 	@Override

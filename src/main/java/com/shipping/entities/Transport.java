@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
@@ -16,12 +18,15 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 public class Transport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Long id;
 	@Column(name = "value_transport")
 	private Double value;
 	@JsonFormat(shape = Shape.STRING,pattern = "yyyy-MM-dd")
 	private Date date;
 	private String observation;
+	@ManyToOne
+	@JoinColumn(name = "company_id")
 	private ShippingCompany company;
 
 	public Transport() {
