@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ShippingCompany implements Serializable{
 
@@ -20,6 +22,7 @@ public class ShippingCompany implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	@JsonIgnore
 	@OneToMany(mappedBy = "company")
 	private List<Transport> transports = new ArrayList<>();
 	
