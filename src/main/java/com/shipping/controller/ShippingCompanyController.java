@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,8 +27,9 @@ public class ShippingCompanyController {
 	}
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public ShippingCompany add(@RequestBody ShippingCompany shippingCompany) {
-		return shippingCompanyRepository.save(shippingCompany);
+	public ResponseEntity<ShippingCompany>add(@RequestBody ShippingCompany shippingCompany) {
+		shippingCompanyRepository.save(shippingCompany);
+		return ResponseEntity.ok(shippingCompany);
 	}
 	
 

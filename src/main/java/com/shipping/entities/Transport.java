@@ -72,6 +72,12 @@ public class Transport {
 	public void setObservation(String observation) {
 		this.observation = observation;
 	}
+	
+
+	public ShippingCompany getCompany() {
+		return company;
+	}
+
 
 	@Override
 	public int hashCode() {
