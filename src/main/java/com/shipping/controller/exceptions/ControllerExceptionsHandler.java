@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.shipping.exceptions.EntityNotFoundException;
 
 @ControllerAdvice
-public class ControllerExcepetionsHandler{
+public class ControllerExceptionsHandler{
 
 
 	@ExceptionHandler(EntityNotFoundException.class)

@@ -28,8 +28,11 @@ public class TransportService {
 				()->new EntityNotFoundException("Id not found: " + id));
 	}
 
-
+	//If the company donesn't exist, throw a EntityNotFoundException
 	public Transport save(Transport transport) {
+		if(company.findById(transport.getCompany().getId()).isEmpty()) {
+			throw new EntityNotFoundException("Company id not found: " + transport.getCompany().getId());
+		}
 		return transportRepository.save(transport);
 	}
 }
