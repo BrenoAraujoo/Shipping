@@ -1,13 +1,11 @@
 package com.shipping.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.shipping.entities.Transport;
+import com.shipping.exceptions.EntityNotFoundException;
 import com.shipping.repositories.ShippingCompanyRepository;
 import com.shipping.repositories.TransportRepository;
 @Service
@@ -26,12 +24,12 @@ public class TransportService {
 	
 
 	public Transport findById(Long id) {
-		Optional <Transport> transp  = transportRepository.findById(id);
-		return transp.get();
+		return transportRepository.findById(id).orElseThrow(
+				()->new EntityNotFoundException("Id not found: " + id));
 	}
 
 
-	public Transport save(@RequestBody Transport transport) {
+	public Transport save(Transport transport) {
 		return transportRepository.save(transport);
 	}
 }

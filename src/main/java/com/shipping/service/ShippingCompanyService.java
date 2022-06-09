@@ -1,13 +1,13 @@
 package com.shipping.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.shipping.entities.ShippingCompany;
+import com.shipping.exceptions.EntityNotFoundException;
 import com.shipping.repositories.ShippingCompanyRepository;
 @Service
 public class ShippingCompanyService {
@@ -23,8 +23,10 @@ public class ShippingCompanyService {
 	
 
 	public ShippingCompany findById(Long id) {
-		Optional <ShippingCompany> company  = shippingCompany.findById(id);
-		return company.get();
+		ShippingCompany shipping = shippingCompany.findById(id).orElseThrow(
+				()->new EntityNotFoundException("Id not found: " + id));
+		return shipping;
+				
 	}
 
 

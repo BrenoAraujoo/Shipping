@@ -31,7 +31,8 @@ public class TransportController {
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Transport> findById(@PathVariable Long id){
-		return ResponseEntity.ok(transportService.findById(id));
+		Transport transp = transportService.findById(id);
+		return ResponseEntity.ok().body(transp);
 	}
 
 	@PostMapping
