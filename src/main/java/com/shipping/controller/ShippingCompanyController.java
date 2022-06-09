@@ -1,7 +1,6 @@
 package com.shipping.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,30 +14,29 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shipping.entities.ShippingCompany;
-import com.shipping.repositories.ShippingCompanyRepository;
+import com.shipping.service.ShippingCompanyService;
 
 @RestController
 @RequestMapping("/ShippingCompany")
 public class ShippingCompanyController {
 	
 	@Autowired
-	private ShippingCompanyRepository shippingCompanyRepository;
+	private ShippingCompanyService shippingCompanyService;
+	
 	@GetMapping
-	public List<ShippingCompany> list (){
-		return shippingCompanyRepository.findAll();
+	public List<ShippingCompany> findAll (){
+		return shippingCompanyService.findAll();
 	}
 	@GetMapping(value = "/{id}")
-	public Optional<ShippingCompany> findById(@PathVariable("id") Long id){
-		Optional<ShippingCompany> company = shippingCompanyRepository.findById(id);
-		return company;
+	public ResponseEntity<ShippingCompany> findById(@PathVariable("id") Long id){
+		return ResponseEntity.ok(shippingCompanyService.findById(id));
 		
 	}
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public ResponseEntity<ShippingCompany>add(@RequestBody ShippingCompany shippingCompany) {
-		shippingCompanyRepository.save(shippingCompany);
+		shippingCompanyService.save(shippingCompany);
 		return ResponseEntity.ok(shippingCompany);
 	}
-	
 
 }

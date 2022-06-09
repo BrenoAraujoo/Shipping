@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,32 +14,30 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shipping.entities.Transport;
-import com.shipping.repositories.ShippingCompanyRepository;
-import com.shipping.repositories.TransportRepository;
+import com.shipping.service.TransportService;
 
 @RestController
 @RequestMapping("/Transports")
 public class TransportController {
 
 	@Autowired
-	private TransportRepository transportRepository;
-	@Autowired
-	private ShippingCompanyRepository company;
+	private TransportService transportService;
 
 	@GetMapping
 	public ResponseEntity<List<Transport>> list() {
-		List<Transport> list = transportRepository.findAll();
+		List<Transport> list = transportService.findAll();
 		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Transport> findById(@PathVariable Long id){
+		return ResponseEntity.ok(transportService.findById(id));
 	}
 
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public ResponseEntity<String> add(@RequestBody Transport transport) {
-		if (company.findById(transport.getCompany().getId()).isEmpty()) {
-
-			return new ResponseEntity<String>("Shipping company not found!", HttpStatus.BAD_REQUEST);
-		}
-		transportRepository.save(transport);
-		return new ResponseEntity<String>("Sucess", HttpStatus.CREATED);
+	public ResponseEntity<Transport> save(@RequestBody Transport transport) {
+		transport = transportService.save(transport);
+		return ResponseEntity.ok().body(transport);
 	}
 }
