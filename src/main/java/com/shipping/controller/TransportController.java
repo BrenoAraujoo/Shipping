@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shipping.entities.Transport;
@@ -38,21 +37,22 @@ public class TransportController {
 	}
 
 	@PostMapping
-	@ResponseStatus(code = HttpStatus.CREATED)
 	public ResponseEntity<Transport> save(@RequestBody Transport transport) {
 		transport = transportService.save(transport);
 		return ResponseEntity.ok().body(transport);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Transport> delete(@PathVariable("id") Long id) {
+	public ResponseEntity<String> delete(@PathVariable("id") Long id) {
 		transportService.delete(id);
-		return ResponseEntity.noContent().build();
+		return new ResponseEntity<>("Sucessfully deleted: " + 
+		id, HttpStatus.OK);
 	}
 	
 	@PutMapping
-	public ResponseEntity<Transport> update(@RequestBody Transport transport){
+	public ResponseEntity<String> update(@RequestBody Transport transport){
 		transportService.update(transport);
-		return ResponseEntity.noContent().build();
+		return new ResponseEntity<>("Sucessfully updated: " + 
+		transport.getCompany().getName(),HttpStatus.OK);
 	}
 }

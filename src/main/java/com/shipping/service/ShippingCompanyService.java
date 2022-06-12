@@ -20,15 +20,15 @@ public class ShippingCompanyService {
 	}
 
 	public ShippingCompany findById(Long id) {
-		ShippingCompany shipping = shippingCompany.findById(id)
+		return shippingCompany.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("Id not found: " + id));
-		return shipping;
+		
 	}
 
 	public ShippingCompany save(ShippingCompany company) {
 		return shippingCompany.save(company);
 	}
-
+	
 	// If the company doesn't exist, throw a EntityNotFoundException
 	public void delete(Long id) {
 		if (shippingCompany.findById(id).isEmpty()) {
