@@ -43,7 +43,7 @@ public class TransportController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+	public ResponseEntity<String> delete(@PathVariable Long id) {
 		transportService.delete(id);
 		return new ResponseEntity<>("Sucessfully deleted: " + 
 		id, HttpStatus.OK);

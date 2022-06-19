@@ -18,16 +18,23 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 public class Transport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	private Long id;
+	
 	@Column(name = "value_transport")
 	private Double value;
+	
 	@JsonFormat(shape = Shape.STRING,pattern = "yyyy-MM-dd")
 	private Date date;
 	private String observation;
+	
 	@ManyToOne
 	@JoinColumn(name = "company_id")
 	private ShippingCompany company;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	public Transport() {
 	}
@@ -77,7 +84,15 @@ public class Transport {
 	public ShippingCompany getCompany() {
 		return company;
 	}
+	
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	@Override
 	public int hashCode() {

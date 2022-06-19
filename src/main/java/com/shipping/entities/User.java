@@ -1,46 +1,35 @@
 package com.shipping.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class ShippingCompany implements Serializable{
+@Table(name = "tb_user")
+public class User implements Serializable{
 
 
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotBlank(message = "name is mandatory")
+	@Basic(optional = false)
 	private String name;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "company")
-	private List<Transport> transports = new ArrayList<>();
-	
-	public ShippingCompany() {
-
+	public User() {
 	}
-	
 
-	public ShippingCompany(Long id, String name) {
-		super();
+	public User(Long id, String name) {
 		this.id = id;
 		this.name = name;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -58,19 +47,10 @@ public class ShippingCompany implements Serializable{
 		this.name = name;
 	}
 
-
-
-	public List<Transport> getTransports() {
-		return transports;
-	}
-
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name);
+		return Objects.hash(id);
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -80,9 +60,10 @@ public class ShippingCompany implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ShippingCompany other = (ShippingCompany) obj;
-		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
+		User other = (User) obj;
+		return Objects.equals(id, other.id);
 	}
+	
 	
 	
 }
