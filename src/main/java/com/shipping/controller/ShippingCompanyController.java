@@ -51,7 +51,7 @@ public class ShippingCompanyController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<String> update(@RequestBody ShippingCompany company){
+	public ResponseEntity<String> update(@Valid @RequestBody ShippingCompany company){
 		shippingCompanyService.update(company);
 		return new ResponseEntity<>("Sucessfully updated " + 
 		company.getName(), HttpStatus.OK);

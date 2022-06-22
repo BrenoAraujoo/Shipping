@@ -1,4 +1,4 @@
-package com.shipping.controller.exceptions;
+package com.shipping.exceptions.handler;
 
 import java.time.Instant;
 
@@ -25,4 +25,5 @@ public class ControllerBadRequestExceptionsHandler{
 		err.setPath(request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
+	
 }

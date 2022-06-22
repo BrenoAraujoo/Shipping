@@ -1,7 +1,9 @@
-package com.shipping.controller.exceptions;
+package com.shipping.exceptions.handler;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StandardError implements Serializable{
 
@@ -13,6 +15,7 @@ public class StandardError implements Serializable{
 	private String error;
 	private String message;
 	private String path;
+	private List<String>fieldError = new ArrayList<>();
 
 	public StandardError() {
 	}
@@ -25,6 +28,15 @@ public class StandardError implements Serializable{
 		this.message = message;
 		this.path = path;
 	}
+	public StandardError(Instant timestamp, Integer status, String error, String message, String path,List<String> fieldError) {
+		super();
+		this.timestamp = timestamp;
+		this.status = status;
+		this.error = error;
+		this.message = message;
+		this.path = path;
+	}
+	
 
 	public Instant getTimestamp() {
 		return timestamp;
@@ -65,7 +77,14 @@ public class StandardError implements Serializable{
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
 
+	public List<String> getFieldError() {
+		return fieldError;
+	}
+
+	
+	public void addFieldErro(String error) {
+		fieldError.add(error);
+	}
 
 }

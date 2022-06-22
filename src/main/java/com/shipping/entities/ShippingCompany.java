@@ -10,11 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "tb_shipping_company")
 public class ShippingCompany implements Serializable{
 
 
@@ -23,7 +26,8 @@ public class ShippingCompany implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "name is mandatory")
+	@NotBlank(message = "Name cannot be null or empty")
+	@Size(max = 20, min = 1, message = "Name must have size between 1 and 10 characters")
 	private String name;
 	
 	@JsonIgnore
@@ -33,7 +37,6 @@ public class ShippingCompany implements Serializable{
 	public ShippingCompany() {
 
 	}
-	
 
 	public ShippingCompany(Long id, String name) {
 		super();

@@ -10,17 +10,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 @Entity
+@Table(name = "tb_transport")
 public class Transport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "value_transport")
+	@Positive(message = "value must be greater then 0")
 	private Double value;
 	
 	@JsonFormat(shape = Shape.STRING,pattern = "yyyy-MM-dd")
@@ -34,6 +39,7 @@ public class Transport {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
+	@NotNull
 	private User user;
 
 	public Transport() {

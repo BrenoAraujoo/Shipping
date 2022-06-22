@@ -2,6 +2,8 @@ package com.shipping.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +39,7 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> save(@RequestBody User user){
+	public ResponseEntity<User> save(@Valid @RequestBody User user){
 		user = userService.save(user);
 		return ResponseEntity.ok().body(user);
 		
@@ -49,10 +51,11 @@ public class UserController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<String> update(@RequestBody User user){
+	public ResponseEntity<String> update(@Valid @RequestBody User user){
 		userService.update(user);
 		return new ResponseEntity<>("Sucessfully updated: " + user.getName(),
 				HttpStatus.OK);
 	}
+	
 
 }

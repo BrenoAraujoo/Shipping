@@ -2,6 +2,8 @@ package com.shipping.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,13 +39,13 @@ public class TransportController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Transport> save(@RequestBody Transport transport) {
+	public ResponseEntity<Transport> save(@Valid @RequestBody Transport transport) {
 		transport = transportService.save(transport);
 		return ResponseEntity.ok().body(transport);
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<String> delete(@PathVariable Long id) {
+	public ResponseEntity<String> delete(@Valid @PathVariable Long id) {
 		transportService.delete(id);
 		return new ResponseEntity<>("Sucessfully deleted: " + 
 		id, HttpStatus.OK);

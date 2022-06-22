@@ -24,9 +24,10 @@ public class UserService {
 	}
 
 	public User findByid(Long id) {
-		return userRepository.findById(id).orElseThrow(
-				() -> new EntityNotFoundException("User not found:" + id));
+		return userRepository.findById(id).
+				orElseThrow(() -> new EntityNotFoundException("User not found:" + id));
 	}
+
 
 	public void delete(Long id) {
 		if (userRepository.findById(id).isEmpty()) {
@@ -34,7 +35,7 @@ public class UserService {
 		}
 		userRepository.deleteById(id);
 	}
-	
+
 	public void update(User user) {
 		userRepository.findById(user.getId());
 		userRepository.save(user);
