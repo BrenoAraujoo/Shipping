@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Profile;
 import com.shipping.entities.ShippingCompany;
 import com.shipping.entities.Transport;
 import com.shipping.entities.User;
+import com.shipping.entities.enums.TransportType;
 import com.shipping.repositories.ShippingCompanyRepository;
 import com.shipping.repositories.TransportRepository;
 import com.shipping.repositories.UserRepository;
@@ -44,9 +45,16 @@ public class TestConfig implements CommandLineRunner {
 		shippingCompanyRepository.save(c1);
 		shippingCompanyRepository.save(c2);
 
-		Transport t1 = new Transport(null, 200.00, sdf.parse("2022-01-01"), "teste", c1);
+		Transport t1 = new Transport(null, 200.00, sdf.parse("2022-01-01"), 
+				"teste", c1,TransportType.DELIVERY);
+		Transport t2 = new Transport(null, 2000.00, sdf.parse("2022-05-01"), 
+				"teste", c2,TransportType.REMOVAL);
+		
 		t1.setUser(u1);
+		t2.setUser(u2);
+		
 		transportRepository.save(t1);
+		transportRepository.save(t2);
 	}
 
 }

@@ -16,6 +16,7 @@ import javax.validation.constraints.Positive;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.shipping.entities.enums.TransportType;
 
 @Entity
 @Table(name = "tb_transport")
@@ -41,17 +42,21 @@ public class Transport {
 	@JoinColumn(name = "user_id")
 	@NotNull(message = "User cannot be null or empty")
 	private User user;
+	@NotNull(message = "Transport type cannot be null or empty")
+	private Integer transportType;
 
 	public Transport() {
 	}
 
-	public Transport(Long id, Double value, Date date, String observation, ShippingCompany company) {
+	public Transport(Long id, Double value, Date date, String observation, 
+			ShippingCompany company, TransportType transportType) {
 		super();
 		this.id = id;
 		this.value = value;
 		this.date = date;
 		this.observation = observation;
 		this.company = company;
+		setTransportType(transportType);
 	}
 
 	public Long getId() {
@@ -98,6 +103,19 @@ public class Transport {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	
+
+	public TransportType getTransportType() {
+		return TransportType.valueOf(transportType);
+	}
+
+	public void setTransportType(TransportType transportType) {
+		if(transportType != null) {
+			this.transportType = transportType.getCode();
+		}
+		
 	}
 
 	@Override
