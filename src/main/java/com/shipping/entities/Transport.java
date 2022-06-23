@@ -39,7 +39,7 @@ public class Transport {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	@NotNull
+	@NotNull(message = "User cannot be null or empty")
 	private User user;
 
 	public Transport() {

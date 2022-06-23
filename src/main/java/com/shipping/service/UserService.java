@@ -25,13 +25,13 @@ public class UserService {
 
 	public User findByid(Long id) {
 		return userRepository.findById(id).
-				orElseThrow(() -> new EntityNotFoundException("User not found:" + id));
+				orElseThrow(() -> new EntityNotFoundException("User not found: " + id));
 	}
 
 
 	public void delete(Long id) {
 		if (userRepository.findById(id).isEmpty()) {
-			throw new EntityNotFoundException("User not found:" + id);
+			throw new EntityNotFoundException("User not found:  " + id);
 		}
 		userRepository.deleteById(id);
 	}

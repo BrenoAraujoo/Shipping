@@ -27,7 +27,7 @@ public class ShippingCompany implements Serializable{
 	private Long id;
 	
 	@NotBlank(message = "Name cannot be null or empty")
-	@Size(max = 20, min = 1, message = "Name must have size between 1 and 10 characters")
+	@Size(max = 20, min = 1, message = "Name must have size between 1 and 20 characters")
 	private String name;
 	
 	@JsonIgnore
@@ -72,8 +72,6 @@ public class ShippingCompany implements Serializable{
 	public int hashCode() {
 		return Objects.hash(id, name);
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
