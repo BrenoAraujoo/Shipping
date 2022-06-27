@@ -29,7 +29,6 @@ public class TransportService {
 	}
 
 	// If the company doesn't exist, throw a EntityNotFoundException
-	//Transport value must be greater then 0.
 	public Transport save(Transport transport) {
 		if (companyRepository.findById(transport.getCompany().getId()).isEmpty()) {
 			throw new EntityNotFoundException("Company id not found: " + transport.getCompany().getId());
